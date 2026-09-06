@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as HistoricalDataRouteImport } from './routes/historical-data'
 import { Route as LiveMonitoringRouteImport } from './routes/live-monitoring'
+import { Route as PredictionsRouteImport } from './routes/predictions'
 import { Route as RiskMapRouteImport } from './routes/risk-map'
 import { Route as SensorDataRouteImport } from './routes/sensor-data'
 
@@ -19,9 +21,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HistoricalDataRoute = HistoricalDataRouteImport.update({
+  id: '/historical-data',
+  path: '/historical-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LiveMonitoringRoute = LiveMonitoringRouteImport.update({
   id: '/live-monitoring',
   path: '/live-monitoring',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PredictionsRoute = PredictionsRouteImport.update({
+  id: '/predictions',
+  path: '/predictions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RiskMapRoute = RiskMapRouteImport.update({
@@ -37,34 +49,61 @@ const SensorDataRoute = SensorDataRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/historical-data': typeof HistoricalDataRoute
   '/live-monitoring': typeof LiveMonitoringRoute
+  '/predictions': typeof PredictionsRoute
   '/risk-map': typeof RiskMapRoute
   '/sensor-data': typeof SensorDataRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/historical-data': typeof HistoricalDataRoute
   '/live-monitoring': typeof LiveMonitoringRoute
+  '/predictions': typeof PredictionsRoute
   '/risk-map': typeof RiskMapRoute
   '/sensor-data': typeof SensorDataRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/historical-data': typeof HistoricalDataRoute
   '/live-monitoring': typeof LiveMonitoringRoute
+  '/predictions': typeof PredictionsRoute
   '/risk-map': typeof RiskMapRoute
   '/sensor-data': typeof SensorDataRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/live-monitoring' | '/risk-map' | '/sensor-data'
+  fullPaths:
+    | '/'
+    | '/historical-data'
+    | '/live-monitoring'
+    | '/predictions'
+    | '/risk-map'
+    | '/sensor-data'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/live-monitoring' | '/risk-map' | '/sensor-data'
-  id: '__root__' | '/' | '/live-monitoring' | '/risk-map' | '/sensor-data'
+  to:
+    | '/'
+    | '/historical-data'
+    | '/live-monitoring'
+    | '/predictions'
+    | '/risk-map'
+    | '/sensor-data'
+  id:
+    | '__root__'
+    | '/'
+    | '/historical-data'
+    | '/live-monitoring'
+    | '/predictions'
+    | '/risk-map'
+    | '/sensor-data'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  HistoricalDataRoute: typeof HistoricalDataRoute
   LiveMonitoringRoute: typeof LiveMonitoringRoute
+  PredictionsRoute: typeof PredictionsRoute
   RiskMapRoute: typeof RiskMapRoute
   SensorDataRoute: typeof SensorDataRoute
 }
@@ -78,11 +117,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/historical-data': {
+      id: '/historical-data'
+      path: '/historical-data'
+      fullPath: '/historical-data'
+      preLoaderRoute: typeof HistoricalDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/live-monitoring': {
       id: '/live-monitoring'
       path: '/live-monitoring'
       fullPath: '/live-monitoring'
       preLoaderRoute: typeof LiveMonitoringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/predictions': {
+      id: '/predictions'
+      path: '/predictions'
+      fullPath: '/predictions'
+      preLoaderRoute: typeof PredictionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/risk-map': {
@@ -104,7 +157,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  HistoricalDataRoute: HistoricalDataRoute,
   LiveMonitoringRoute: LiveMonitoringRoute,
+  PredictionsRoute: PredictionsRoute,
   RiskMapRoute: RiskMapRoute,
   SensorDataRoute: SensorDataRoute,
 }
