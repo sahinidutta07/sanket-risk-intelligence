@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as LiveMonitoringRouteImport } from './routes/live-monitoring'
+import { Route as RiskMapRouteImport } from './routes/risk-map'
+import { Route as SensorDataRouteImport } from './routes/sensor-data'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +24,49 @@ const LiveMonitoringRoute = LiveMonitoringRouteImport.update({
   path: '/live-monitoring',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RiskMapRoute = RiskMapRouteImport.update({
+  id: '/risk-map',
+  path: '/risk-map',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SensorDataRoute = SensorDataRouteImport.update({
+  id: '/sensor-data',
+  path: '/sensor-data',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/live-monitoring': typeof LiveMonitoringRoute
+  '/risk-map': typeof RiskMapRoute
+  '/sensor-data': typeof SensorDataRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/live-monitoring': typeof LiveMonitoringRoute
+  '/risk-map': typeof RiskMapRoute
+  '/sensor-data': typeof SensorDataRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/live-monitoring': typeof LiveMonitoringRoute
+  '/risk-map': typeof RiskMapRoute
+  '/sensor-data': typeof SensorDataRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/live-monitoring'
+  fullPaths: '/' | '/live-monitoring' | '/risk-map' | '/sensor-data'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/live-monitoring'
-  id: '__root__' | '/' | '/live-monitoring'
+  to: '/' | '/live-monitoring' | '/risk-map' | '/sensor-data'
+  id: '__root__' | '/' | '/live-monitoring' | '/risk-map' | '/sensor-data'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LiveMonitoringRoute: typeof LiveMonitoringRoute
+  RiskMapRoute: typeof RiskMapRoute
+  SensorDataRoute: typeof SensorDataRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +85,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LiveMonitoringRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/risk-map': {
+      id: '/risk-map'
+      path: '/risk-map'
+      fullPath: '/risk-map'
+      preLoaderRoute: typeof RiskMapRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sensor-data': {
+      id: '/sensor-data'
+      path: '/sensor-data'
+      fullPath: '/sensor-data'
+      preLoaderRoute: typeof SensorDataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LiveMonitoringRoute: LiveMonitoringRoute,
+  RiskMapRoute: RiskMapRoute,
+  SensorDataRoute: SensorDataRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

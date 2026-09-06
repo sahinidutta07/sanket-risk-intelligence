@@ -42,10 +42,6 @@ const STATUS_COLOR: Record<SensorStatus, string> = {
 
 const FILTERS = ["All", "Online", "Warning", "Critical", "Offline"] as const;
 
-export default function _noop() {
-  return null;
-}
-
 function SensorDataPage() {
   const { simProgress, lastSync } = useSanketState();
   const [filter, setFilter] = useState<(typeof FILTERS)[number]>("All");
