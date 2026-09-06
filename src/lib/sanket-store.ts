@@ -91,7 +91,6 @@ let state: SanketState = {
 const listeners = new Set<() => void>();
 
 function emit() {
-  listeners.add;
   listeners.forEach((l) => l());
 }
 
@@ -213,7 +212,7 @@ export function snapshotAreas(progress: number): AreaSnapshot[] {
 
 export function snapshotArea(id: string, progress: number): AreaSnapshot {
   const all = snapshotAreas(progress);
-  return all.find((a) => a.area.id === id) ?? all[0];
+  return all.find((a) => a.area.id === id) ?? all[0]!;
 }
 
 export function overallRisk(progress: number) {
