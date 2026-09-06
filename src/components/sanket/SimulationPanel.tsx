@@ -6,7 +6,7 @@ import {
   resetSimulation,
   snapshotArea,
   startSimulation,
-  useSanket,
+  useSanketState,
 } from "@/lib/sanket-store";
 import { AnimatedNumber, RiskBadge } from "./primitives";
 import { riskLevel } from "@/lib/risk-engine";
@@ -45,11 +45,7 @@ function Row({
 
 export function SimulationPanel() {
   const [open, setOpen] = useState(false);
-  const { simProgress, simRunning, simStage } = useSanket((s) => ({
-    simProgress: s.simProgress,
-    simRunning: s.simRunning,
-    simStage: s.simStage,
-  }));
+  const { simProgress, simRunning, simStage } = useSanketState();
 
   const now = snapshotArea("lebong", simProgress);
   const base = snapshotArea("lebong", 0);
