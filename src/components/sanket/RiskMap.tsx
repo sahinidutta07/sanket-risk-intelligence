@@ -93,12 +93,14 @@ export function RiskMap({
   showControls = true,
   showSensorStatus = false,
   onSensorSelect,
+  className,
 }: {
-  height?: number;
+  height?: number | string;
   layers?: MapLayers;
   showControls?: boolean;
   showSensorStatus?: boolean;
   onSensorSelect?: (id: string) => void;
+  className?: string;
 }) {
   const { simProgress, selectedAreaId, lastSync } = useSanketState();
   const [zoom, setZoom] = useState(1);
@@ -110,7 +112,10 @@ export function RiskMap({
 
   return (
     <div
-      className="relative overflow-hidden rounded-lg border border-border bg-[#050B12]"
+      className={cn(
+        "relative overflow-hidden rounded-lg border border-border bg-[#050B12]",
+        className,
+      )}
       style={{ height }}
     >
       <div
