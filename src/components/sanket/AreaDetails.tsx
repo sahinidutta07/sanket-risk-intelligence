@@ -46,35 +46,44 @@ export function AreaDetails({
         <RiskBadge level={snap.level} />
       </div>
 
-      <div className="flex items-baseline gap-3 border-b border-border px-4 py-3">
-        <div className={cn("text-[32px] leading-none font-semibold", riskText[snap.level])}>
-          <AnimatedNumber value={snap.score} />
-          <span className="text-[16px]">%</span>
+      <div className="grid grid-cols-2 gap-3 border-b border-border px-4 py-3">
+        <div>
+          <div className={cn("text-[32px] leading-none font-semibold", riskText[snap.level])}>
+            <AnimatedNumber value={snap.score} />
+            <span className="text-[16px]">%</span>
+          </div>
+          <div className="label-xs mt-1">Risk score</div>
         </div>
-        <div className="label-xs">Risk score</div>
-        <div className="ml-auto text-right">
-          <div className="mono-num text-[16px] text-foreground">{snap.confidence}%</div>
-          <div className="label-xs">AI confidence</div>
+        <div className="text-right">
+          <div className="mono-num text-[22px] leading-none font-semibold text-foreground">
+            {snap.confidence}%
+          </div>
+          <div className="label-xs mt-1">AI confidence</div>
         </div>
       </div>
 
       <div className="flex-1 px-4 py-3">
         <div className="label-xs mb-2.5">Risk drivers</div>
-        <ul className="space-y-2.5">
+        <ul className="space-y-2">
           {contributions.map((c) => {
             const Icon = ICONS[c.key];
             const raw = snap.factors[c.key];
             const impact = impactLabel(c.share);
             return (
-              <li key={c.key} className="flex items-center gap-3">
-                <Icon className="size-3.5 shrink-0 text-muted-foreground" />
-                <span className="w-[112px] shrink-0 text-[12px] text-foreground">
-                  {FACTOR_LABEL[c.key]}
-                </span>
-                <span className="mono-num w-[74px] shrink-0 text-[12px] text-foreground">
-                  {c.key === "landCover" ? `${Math.round(raw * 100)}%` : `${raw}${FACTOR_UNIT[c.key]}`}
-                </span>
-                <span className="h-1 flex-1 overflow-hidden rounded-full bg-muted">
+              <li key={c.key} className="space-y-1.5">
+                <div className="grid grid-cols-[1fr_80px_120px] items-center gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <Icon className="size-3.5 shrink-0 text-muted-foreground" />
+                    <span className="truncate text-[12px] text-foreground">
+                      {FACTOR_LABEL[c.key]}
+                    </span>
+                  </div>
+                  <span className="mono-num text-right text-[12px] text-foreground">
+                    {c.key === "landCover" ? `${Math.round(raw * 100)}%` : `${raw}${FACTOR_UNIT[c.key]}`}
+                  </span>
+                  <span className="label-xs text-right">{impact}</span>
+                </div>
+                <div className="h-1 overflow-hidden rounded-full bg-muted">
                   <span
                     className={cn(
                       "block h-full rounded-full transition-[width] duration-500",
@@ -86,8 +95,7 @@ export function AreaDetails({
                     )}
                     style={{ width: `${c.share * 2.4}%` }}
                   />
-                </span>
-                <span className="label-xs w-[96px] shrink-0 text-right">{impact}</span>
+                </div>
               </li>
             );
           })}
@@ -106,7 +114,7 @@ export function AreaDetails({
 
         <div className="mt-3 rounded-md border-l-2 border-primary bg-primary/5 px-3 py-2.5">
           <div className="label-xs mb-1">Recommended action</div>
-          <p className="text-[12.5px] text-foreground/85">
+          <p className="text-[12.5px] leading-relaxed text-foreground/85">
             {critical
               ? "Increase monitoring frequency to 5-minute intervals and initiate local authority verification of the NH-110 slope corridor."
               : "Maintain standard 15-minute polling. No field verification required at present."}
