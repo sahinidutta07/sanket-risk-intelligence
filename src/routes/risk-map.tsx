@@ -46,14 +46,19 @@ function RiskMapPage() {
         subtitle="Geospatial landslide risk across all monitored zones"
       />
 
-      <div className="grid grid-cols-1 items-start gap-3 xl:grid-cols-[minmax(0,1fr)_400px]">
-        <div className="panel overflow-hidden">
+      <div className="grid grid-cols-1 gap-3 xl:grid-cols-[minmax(0,1fr)_400px]">
+        <div className="panel flex flex-col overflow-hidden">
           <PanelHeader
             title="Regional risk surface"
             subtitle="Click a zone marker to inspect its contributing factors"
           />
-          <div className="p-3">
-            <RiskMap height={520} layers={layers} showSensorStatus={layers.sensors} />
+          <div className="flex-1 min-h-0 p-3">
+            <RiskMap
+              height="100%"
+              layers={layers}
+              showSensorStatus={layers.sensors}
+              className="h-full"
+            />
           </div>
         </div>
 
