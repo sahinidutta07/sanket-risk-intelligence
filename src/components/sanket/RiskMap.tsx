@@ -112,7 +112,10 @@ export function RiskMap({
 
   return (
     <div
-      className="relative overflow-hidden rounded-lg border border-border bg-[#050B12]"
+      className={cn(
+        "relative overflow-hidden rounded-lg border border-border bg-[#050B12]",
+        className,
+      )}
       style={{ height }}
     >
       <div
