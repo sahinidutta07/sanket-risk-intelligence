@@ -1,4 +1,4 @@
-# SANKET — AI-Powered Landslide Risk Intelligence System
+# SANKET - AI-Powered Landslide Risk Intelligence System
 
 SANKET is an AI-powered landslide monitoring and early-warning system designed to assess landslide risk in vulnerable mountainous regions using real-time sensor data, environmental parameters, and predictive analytics.
 
